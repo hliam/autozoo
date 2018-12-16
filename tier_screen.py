@@ -97,6 +97,7 @@ class TierScreen:
     def __init__(self, template_file: os.PathLike, image: Image, *heights: int):
         self.template_file = template_file
         self.image = image.convert('RGB')
+        self.image.thumbnail((460, 396), Image.ANTIALIAS)
         self._image_pos = Pos(100, 151)
         if len(heights) == 1:
             heights = heights[0]
