@@ -75,21 +75,21 @@ class Bar:
         draw.rectangle(self.pos.tup() + top_right.tup(), fill=self.color)
 
 
-class TierScreen:
-    """A tier screen.
+class StatScreen:
+    """A stat screen.
     
     Args:
-        template_file: The file containing the tier screen template.
-        image: The image to use in the tier screen. This should be
+        template_file: The file containing the stat screen template.
+        image: The image to use in the stat screen. This should be
             460x396.
         *heights: The heights of the bars in the graph in range 0-100.
             Order: (int, pwr, def, mbl, hp, stl). If the first item is
             an iterable, that will become the heights list.
 
     Attributes:
-        template_file (os.PathLike): The file containing the tier screen
+        template_file (os.PathLike): The file containing the stat screen
             template.
-        image (Image): The image to use in the tier screen.
+        image (Image): The image to use in the stat screen.
         bars (dict): A list of `Bar` objects. These are the bars of the
             graph for the int, pwr, def, mbl, hp, and stl.
     """
@@ -115,35 +115,40 @@ class TierScreen:
         }
 
     def save(self, filename: str):
-        """Save the tier screen to file `filename`."""
-        tier_screen_image = Image.open(self.template_file)
-        tier_screen_image.paste(self.image, self._image_pos.tup())
+        """Save the stat screen to file `filename`."""
+        stat_screen_image = Image.open(self.template_file)
+        stat_screen_image.paste(self.image, self._image_pos.tup())
         for bar in self.bars.values():
-            bar.draw(tier_screen_image)
-        tier_screen_image.save(filename, 'jpeg')
+            bar.draw(stat_screen_image)
+        stat_screen_image.save(filename, 'jpeg')
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image', '-i', action='store', type=str,
+    parser.add_argument('--image', '-i', action='store', type=str, required=True,
                         help='the name of file containing the image to use. should be 460x396')
-    parser.add_argument('--output', '-o', action='store', type=str, help='the name of output file')
-    parser.add_argument('--int', '-I', action='store', type=int, help='the int to be dispalyed on the tier screen image')
-    parser.add_argument('--pwr', '-P', action='store', type=int, help='the pwr to be dispalyed on the tier screen image')
-    parser.add_argument('--def', '-D', action='store', type=int, help='the def to be dispalyed on the tier screen image',
-                        dest='def_')
-    parser.add_argument('--mbl', '-M', action='store', type=int, help='the mbl to be dispalyed on the tier screen image')
-    parser.add_argument('--hp',  '-H', action='store', type=int, help='the hp to be dispalyed on the tier screen image')
-    parser.add_argument('--stl', '-S', action='store', type=int, help='the stl to be dispalyed on the tier screen image')
+    parser.add_argument('--output', '-o', action='store', type=str, required=True, help='the name of output file')
+    parser.add_argument('--int', '-I', action='store', type=int, required=True,
+                        help='the int to be dispalyed on the stat screen image')
+    parser.add_argument('--pwr', '-P', action='store', type=int, required=True,
+                        help='the pwr to be dispalyed on the stat screen image')
+    parser.add_argument('--def', '-D', action='store', type=int, required=True,
+                        help='the def to be dispalyed on the stat screen image', dest='def_')
+    parser.add_argument('--mbl', '-M', action='store', type=int, required=True,
+                        help='the mbl to be dispalyed on the stat screen image')
+    parser.add_argument('--hp',  '-H', action='store', type=int, required=True,
+                        help='the hp to be dispalyed on the stat screen image')
+    parser.add_argument('--stl', '-S', action='store', type=int, required=True,
+                        help='the stl to be dispalyed on the stat screen image')
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
     image = Image.open(args.image)
-    tier_screen = TierScreen(template_file, image,
+    stat_screen = StatScreen(template_file, image,
                              args.int, args.pwr, args.def_, args.mbl, args.hp, args.stl)
-    tier_screen.save(args.output)
+    stat_screen.save(args.output)
 
 
 if __name__ == '__main__':
