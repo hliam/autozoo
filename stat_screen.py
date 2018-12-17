@@ -129,17 +129,17 @@ def parse_args():
                         help='the name of file containing the image to use. should be 460x396')
     parser.add_argument('--output', '-o', action='store', type=str, required=True, help='the name of output file')
     parser.add_argument('--int', '-I', action='store', type=int, required=True,
-                        help='the int to be dispalyed on the stat screen image')
+                        help='the int to be displayed on the stat screen image')
     parser.add_argument('--pwr', '-P', action='store', type=int, required=True,
-                        help='the pwr to be dispalyed on the stat screen image')
+                        help='the pwr to be displayed on the stat screen image')
     parser.add_argument('--def', '-D', action='store', type=int, required=True,
-                        help='the def to be dispalyed on the stat screen image', dest='def_')
+                        help='the def to be displayed on the stat screen image', dest='def_')
     parser.add_argument('--mbl', '-M', action='store', type=int, required=True,
-                        help='the mbl to be dispalyed on the stat screen image')
+                        help='the mbl to be displayed on the stat screen image')
     parser.add_argument('--hp',  '-H', action='store', type=int, required=True,
-                        help='the hp to be dispalyed on the stat screen image')
+                        help='the hp to be displayed on the stat screen image')
     parser.add_argument('--stl', '-S', action='store', type=int, required=True,
-                        help='the stl to be dispalyed on the stat screen image')
+                        help='the stl to be displayed on the stat screen image')
     return parser.parse_args()
 
 
