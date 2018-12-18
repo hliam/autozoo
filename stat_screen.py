@@ -77,7 +77,7 @@ class Bar:
 
 class StatScreen:
     """A stat screen.
-    
+
     Args:
         template_file: The file containing the stat screen template.
         image: The image to use in the stat screen. This should be
